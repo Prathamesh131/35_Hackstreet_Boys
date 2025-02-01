@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import LottieView from 'lottie-react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const funThoughts = [
   "Music is the universal language of mankind. 🎶",
@@ -10,8 +11,9 @@ const funThoughts = [
   "Every song has a story to tell. 📖",
 ];
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = () => {
   const [randomThought, setRandomThought] = useState("");
+  const navigation = useNavigation();
 
   useEffect(() => {
     setRandomThought(funThoughts[Math.floor(Math.random() * funThoughts.length)]);
@@ -33,22 +35,21 @@ const HomeScreen = ({ navigation }) => {
 
       {/* Fun Thought */}
       <Text style={styles.funThought}>{randomThought}</Text>
-
-      {/* Navigation Buttons */}
-      {/* <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Uploaded Voice')}>
-        <Text style={styles.buttonText}>Uploaded Voice</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Record Voice')}>
-        <Text style={styles.buttonText}>Record Voice</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Fun Zone')}>
-        <Text style={styles.buttonText}>Fun Zone</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Contact Us')}>
-        <Text style={styles.buttonText}>Contact Us</Text>
-      </TouchableOpacity> */}
     </View>
   );
+};
+
+// Set custom header options
+HomeScreen.navigationOptions = {
+  title: "AuraTune",
+  headerStyle: {
+    backgroundColor: "#4A148C", // Deep Purple Background
+  },
+  headerTitleStyle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#fff",
+  },
 };
 
 const styles = StyleSheet.create({
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#E3F2FD', // Light blue background
+    backgroundColor: '#E3F2FD',
     padding: 20,
   },
   logo: {
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
   appName: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#4A148C', // Deep Purple
+    color: '#4A148C',
     marginBottom: 15,
   },
   animation: {
@@ -79,26 +80,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontStyle: 'italic',
     textAlign: 'center',
-    color: '#FF6D00', // Vibrant Orange
+    color: '#FF6D00',
     marginBottom: 25,
-  },
-  button: {
-    backgroundColor: '#2962FF', // Cool Blue
-    paddingVertical: 12,
-    paddingHorizontal: 30,
-    borderRadius: 25,
-    marginBottom: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 5, // Adds shadow effect for Android
-  },
-  buttonText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#fff', // White text
-    textAlign: 'center',
   },
 });
 
